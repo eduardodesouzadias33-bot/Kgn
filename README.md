@@ -1,49 +1,4 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local player = Players.LocalPlayer
-local pg = player:WaitForChild("PlayerGui")
 
--- ===== util =====
-local function makeCorner(parent, rad)
-	local c = Instance.new("UICorner", parent)
-	c.CornerRadius = UDim.new(0, rad or 8)
-	return c
-end
-local function makeStroke(parent, thickness)
-	local s = Instance.new("UIStroke", parent)
-	s.Thickness = thickness or 2
-	s.LineJoinMode = Enum.LineJoinMode.Round
-	return s
-end
-
--- ===== Interface principal (menu) =====
-local screenGuiMain = Instance.new("ScreenGui")
-screenGuiMain.Name = "KGN_LocalGui_Main"
-screenGuiMain.ResetOnSpawn = false
-screenGuiMain.Parent = pg
-
-local mainFrame = Instance.new("Frame", screenGuiMain)
-mainFrame.Size = UDim2.new(0,420,0,280)
-mainFrame.Position = UDim2.new(0.3,0,0.3,0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(25,25,25)
-mainFrame.BorderSizePixel = 0
-mainFrame.Active = true
-mainFrame.Draggable = true
-makeCorner(mainFrame, 12)
-local stroke = makeStroke(mainFrame, 3)
-spawn(function()
-	while mainFrame and mainFrame.Parent do
-		local t = tick()*0.12
-		stroke.Color = Color3.fromHSV(t%1, 0.95, 1)
-		task.wait(0.03)
-	end
-end)
-
-local top = Instance.new("Frame", mainFrame)
-top.Size = UDim2.new(1,0,0,42)
-top.Position = UDim2.new(0,0,0,0)
-top.BackgroundColor3 = Color3.fromRGB(20,20,20)
 makeCorner(top, 10)
 
 local title = Instance.new("TextLabel", top)
